@@ -34,30 +34,30 @@ Route::post('/cadastrar-produto', function(Request $request){
 
 Route::get('/listar-produto/{id}', function($id){
     //dd(Produto::find($id)); //debug and die
-    $Produto = Produto::find($id);
-    return view('listar', ['Produto' => $Produto]);
+    $produtos = Produto::find($id);
+    return view('listar', ['Produto' => $produtos]);
 });
 
 Route::get('/editar-produto/{id}', function($id){
     //dd(Produto::find($id)); //debug and die
-    $Produto = Produto::find($id);
-    return view('editar', ['Produto' => $Produto]);
+    $produtos = Produto::find($id);
+    return view('editar', ['Produto' => $produtos]);
 });
 
-Route::post('/editar-produto/{$id}', function(Request $request, $id){
+Route::post('/editar-produto/{id}' ,function(Request $request, $id){
     //dd($request->all());
-    $Produto = Produto::find($id);
+    $produtos = Produto::find($id);
 
-    $Produto->update([
+    $produtos->update([
         'Nome' => $request->Nome,
         'Valor' => $request->Valor,
         'Estoque' => $request->Estoque
     ]);
 
-    echo "Produto editado com Sucesso.";
+    echo "Produto editado com sucesso.";
 });
 
-Route::get('/excluir-produto/{$id}', function($id){
+Route::get('/excluir-produto/{id}', function($id){
     //dd($request->all());
     $Produto = Produto::find($id);
     $Produto->delete();
